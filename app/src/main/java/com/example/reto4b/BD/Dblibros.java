@@ -2,6 +2,7 @@ package com.example.reto4b.BD;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
 import androidx.annotation.Nullable;
@@ -45,59 +46,64 @@ public class Dblibros extends LIBROSBD{
         LIBROSBD dbHelper = new LIBROSBD(context);
         SQLiteDatabase db = dbHelper.getWritableDatabase();
 
-        ArrayList<LIBROS> listaContactos = new ArrayList<>();
+        ArrayList<LIBROS> listaLibross = new ArrayList<>();
         LIBROS Libros;
-        Cursor cursorContactos;
+        Cursor cursorLibross;
 
-        cursorContactos = db.rawQuery("SELECT * FROM " + TABLE_LIBROS + " ORDER BY titulo ASC", null);
+        cursorLibross = db.rawQuery("SELECT * FROM " + TABLE_LIBROS + " ORDER BY titulo ASC", null);
 
-        if (cursorContactos.moveToFirst()) {
+        if (cursorLibross.moveToFirst()) {
             do {
                 Libros = new LIBROS();
-                Libros.setTitulo(cursorContactos.(1));
-                contacto.setTelefono(cursorContactos.getString(2));
-                contacto.setCorreo_electornico(cursorContactos.getString(3));
-                listaContactos.add(contacto);
-            } while (cursorContactos.moveToNext());
+                Libros.setTitulo(cursorLibross.getString(0));
+                Libros.setSubtitulo(cursorLibross.getString(1));
+                Libros.setIsbn(cursorLibross.getString(2));
+                Libros.setAutor(cursorLibross.getString(2));
+                Libros.setAnio_publicacion(cursorLibross.getInt(4));
+                Libros.setPrecio(cursorLibross.getInt(5));
+                listaLibross.add(Libros);
+            } while (cursorLibross.moveToNext());
         }
 
-        cursorContactos.close();
+        cursorLibross.close();
 
-        return listaContactos;
+        return listaLibross;
     }
 
-    public Contactos verContacto(int id) {
+    public LIBROS verLibros(int id) {
 
-        DbHelper dbHelper = new DbHelper(context);
-        SQLiteDatabase db = dbHelper.getWritableDatabase();
+        LIBROSBD librosbd = new LIBROSBD(context);
+        SQLiteDatabase db = librosbd.getWritableDatabase();
 
-        Contactos contacto = null;
-        Cursor cursorContactos;
+        LIBROS Libros = null;
+        Cursor cursorLibross;
 
-        cursorContactos = db.rawQuery("SELECT * FROM " + TABLE_CONTACTOS + " WHERE id = " + id + " LIMIT 1", null);
+        cursorLibross = db.rawQuery("SELECT * FROM " + TABLE_LIBROS + " WHERE id = " + id + " LIMIT 1", null);
 
-        if (cursorContactos.moveToFirst()) {
-            contacto = new Contactos();
-            contacto.setId(cursorContactos.getInt(0));
-            contacto.setNombre(cursorContactos.getString(1));
-            contacto.setTelefono(cursorContactos.getString(2));
-            contacto.setCorreo_electornico(cursorContactos.getString(3));
+        if (cursorLibross.moveToFirst()) {
+            Libros = new LIBROS();
+            Libros.setTitulo(cursorLibross.getString(0));
+            Libros.setSubtitulo(cursorLibross.getString(1));
+            Libros.setIsbn(cursorLibross.getString(2));
+            Libros.setAutor(cursorLibross.getString(2));
+            Libros.setAnio_publicacion(cursorLibross.getInt(4));
+            Libros.setPrecio(cursorLibross.getInt(5));
         }
 
-        cursorContactos.close();
+        cursorLibross.close();
 
-        return contacto;
+        return Libros;
     }
 
-    public boolean editarContacto(int id, String nombre, String telefono, String correo_electronico) {
+    public boolean editarLibros(int id, String nombre, String telefono, String correo_electronico) {
 
         boolean correcto = false;
 
-        DbHelper dbHelper = new DbHelper(context);
-        SQLiteDatabase db = dbHelper.getWritableDatabase();
+        LIBROSBD LibrosBD = new Dblibros(context);
+        SQLiteDatabase db = LibrosBD.getWritableDatabase();
 
         try {
-            db.execSQL("UPDATE " + TABLE_CONTACTOS + " SET nombre = '" + nombre + "', telefono = '" + telefono + "', correo_electronico = '" + correo_electronico + "' WHERE id='" + id + "' ");
+            db.execSQL("UPDATE " + TABLE_LIBROS + " SET nombre = '" + nombre + "', telefono = '" + telefono + "', correo_electronico = '" + correo_electronico + "' WHERE id='" + id + "' ");
             correcto = true;
         } catch (Exception ex) {
             ex.toString();
@@ -109,15 +115,15 @@ public class Dblibros extends LIBROSBD{
         return correcto;
     }
 
-    public boolean eliminarContacto(int id) {
+    public boolean eliminarLibros(int id) {
 
         boolean correcto = false;
 
-        DbHelper dbHelper = new DbHelper(context);
-        SQLiteDatabase db = dbHelper.getWritableDatabase();
+        LIBROSBD librosbd = new LIBROSBD(context);
+        SQLiteDatabase db = librosbd.getWritableDatabase();
 
         try {
-            db.execSQL("DELETE FROM " + TABLE_CONTACTOS + " WHERE id = '" + id + "'");
+            db.execSQL("DELETE FROM " + TABLE_LIBROS + " WHERE id = '" + id + "'");
             correcto = true;
         } catch (Exception ex) {
             ex.toString();

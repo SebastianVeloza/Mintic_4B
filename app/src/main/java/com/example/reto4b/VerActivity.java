@@ -23,7 +23,7 @@ public class VerActivity extends AppCompatActivity {
     Button btnGuarda;
     FloatingActionButton fabEditar, fabEliminar;
 
-    Contactos contacto;
+    LIBROS contacto;
     int id = 0;
 
     @Override
@@ -50,7 +50,7 @@ public class VerActivity extends AppCompatActivity {
             id = (int) savedInstanceState.getSerializable("ID");
         }
 
-        final DbContactos dbContactos = new DbContactos(VerActivity.this);
+        final Dblibros dbContactos = new Dblibros(VerActivity.this);
         contacto = dbContactos.verContacto(id);
 
         if(contacto != null){

@@ -40,7 +40,12 @@ public class listaLibrosAdapter extends RecyclerView.Adapter<listaLibrosAdapter.
 
     @Override
     public void onBindViewHolder(@NonNull ContactoViewHolder holder, int position) {
-        holder.viewNombre.setText(listaLibros.get(position).getTitulo());
+        holder.viewtitulo.setText(listaLibros.get(position).getTitulo());
+        holder.viewSubtitulo.setText(listaLibros.get(position).getSubtitulo());
+        holder.viewtitulo.setText(listaLibros.get(position).getTitulo());
+        holder.viewtitulo.setText(listaLibros.get(position).getTitulo());
+        holder.viewtitulo.setText(listaLibros.get(position).getTitulo());
+        holder.viewtitulo.setText(listaLibros.get(position).getTitulo());
         holder.viewTelefono.setText(listaLibros.get(position).getTelefono());
         holder.viewCorreo.setText(listaLibros.get(position).getCorreo_electornico());
     }
