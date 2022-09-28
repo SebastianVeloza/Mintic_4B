@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">Reto4B</string>
+    <string name="hint_titulo">Titulo:</string>
+    <string name="hint_Subtitulo">Subtitulo:</string>
+    <string name="hint_isbn">isbn:</string>
+    <string name="hint_autor">autor:</string>
+    <string name="hint_anio">anio:</string>
+    <string name="hint_precio">precio:</string>
+    <string name="btn_guarda">Guardar registro</string>
+    <string name="menu_nuevo">Nuevo registro</string>
+</resources>
